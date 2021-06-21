@@ -72,12 +72,13 @@
             }
             
             setActiveTimer();
+          initCounter();
         }
       
         function initCounter() {
             var counterDiv = document.getElementById("counter");
-            var currentTime = counterDiv.innerHtml;
-            counterDiv.innerHtml = currentTime - 1;
+            var currentTime = counterDiv.innerText;
+            counterDiv.innerText = currentTime - 1;
             counterTimer = setTimeout(initCounter, 1000);
             console.log(currentTime);
         }
@@ -92,7 +93,7 @@
             var activeTime=document.getElementById("active-time").value;
             document.body.style.backgroundColor = "#66ff00";
             activeTimer = setTimeout(setRestTimer, activeTime*1000);
-            document.getElementById("counter").innerHtml = parseInt(activeTime) + 1;
+            document.getElementById("counter").innerText = parseInt(activeTime) + 1;
             beep();
         }
 
@@ -101,7 +102,7 @@
             var restTime=document.getElementById("rest-time").value;
             document.body.style.backgroundColor = "#ff0000";
             restTimer = setTimeout(setActiveTimer, restTime*1000);
-            document.getElementById("counter").innerHtml = parseInt(restTime) + 1;
+            document.getElementById("counter").innerText = parseInt(restTime) + 1;
             beep();
         }
 
