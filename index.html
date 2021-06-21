@@ -92,7 +92,7 @@
             var activeTime=document.getElementById("active-time").value;
             document.body.style.backgroundColor = "#66ff00";
             activeTimer = setTimeout(setRestTimer, activeTime*1000);
-            document.getElementById("counter").innerHtml = activeTime;
+            document.getElementById("counter").innerHtml = parseInt(activeTime) + 1;
             beep();
         }
 
@@ -101,7 +101,7 @@
             var restTime=document.getElementById("rest-time").value;
             document.body.style.backgroundColor = "#ff0000";
             restTimer = setTimeout(setActiveTimer, restTime*1000);
-            document.getElementById("counter").innerHtml = activeTime;
+            document.getElementById("counter").innerHtml = parseInt(restTime) + 1;
             beep();
         }
 
