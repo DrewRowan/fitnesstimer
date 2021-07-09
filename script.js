@@ -92,5 +92,5 @@ function cancelTimer() {
     document.body.style.backgroundColor = "#fff";
     clearTimeout(timer);
     clearTimeout(counterTimer);
-    document.getElementById("counter").innerText = "Go!";
+    document.getElementById("counter").innerText = "Tap to start!";
 }
