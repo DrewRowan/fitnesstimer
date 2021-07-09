@@ -21,7 +21,7 @@ function toggleState() {
 
     if(isTimerActive) {
         isTimerActive = false;
-        manualCancelTimer();
+        cancelTimer();
     } else {
         noSleep.enable();
         isTimerActive = true;
@@ -83,12 +83,8 @@ function setRestTimer() {
     setTimer(timerTime, setActiveTimer, "#ff0000");
 }
 
-function manualCancelTimer() {
-    noSleep.disable();
-    cancelTimer();
-}
-
 function cancelTimer() {
+    noSleep.disable();
     document.body.style.backgroundColor = "#fff";
     clearTimeout(timer);
     clearTimeout(counterTimer);
