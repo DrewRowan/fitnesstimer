@@ -30,8 +30,7 @@
           <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" id="active-time" type="number" placeholder="Active Time" aria-label="Active Time">
             <input class="form-control mr-sm-2" id="rest-time" type="number" placeholder="Rest Time" aria-label="Rest Time">
-            <input class="btn btn-outline-success my-2 my-sm-0" type="button" id="go" value="Go" onclick="setTimer()">
-            <input class="btn btn-outline-danger my-2 my-sm-0" type="button" id="stop" value="Stop" onclick="manualCancelTimer()">
+            <input class="form-control mr-sm-2" id="intro-countdown" type="checkbox" checked aria-label="Intro countdown?">
           </form>
         </div>
       </nav>
@@ -40,7 +39,7 @@
     <div class="clearfix"></div>
 
     <!-- Begin page content -->
-    <main class="w-100 h-100" role="main" class="container" id="main-body" onclick="toggleTimer()">
+    <main class="w-100 h-100" role="main" class="container" id="main-body">
       <h1 class="w-100 h-100 display-1 text-center" id="counter">Go!</h1>
     </main>
 
