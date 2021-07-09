@@ -1,45 +1,46 @@
 var timer;
 var counterTimer = '';
-var counterDiv = document.getElementById("counter");
 var noSleep = new NoSleep();
 var timerTime = 0;
 var startTimeMS = 0;
+var isTimerActive = false;
 
-function toggleTimer() {
-    toggleState();
-}
+var counterDiv = document.getElementById("counter");
+var activeTime = document.getElementById("active-time");
+var restTime = document.getElementById("rest-time");
+var container = document.getElementById("main-body");
+var introCountdown = document.getElementById("intro-countdown");
 
-function startTimer() {
-    noSleep.enable();
-    cancelTimer();
-    
-    setActiveTimer();
-}
+container.addEventListener("click", toggleState);
 
 function toggleState() {
-    var element = document.getElementById("main-body");
 
-    var activeTime = document.getElementById("active-time").value;
-    var restTime = document.getElementById("rest-time").value;
-
-    if (activeTime == '' || restTime == '') {
-        alert("Both values must be set");
+    if (!areTimersValid()) {
         return;
     }
 
-    element.classList.toggle("state-active");
-
-    if(element.classList.contains("state-active")) {
+    if(isTimerActive) {
+        isTimerActive = false;
+        manualCancelTimer();
+    } else {
+        noSleep.enable();
+        isTimerActive = true;
         setCountdown();
         setDisplayCounter();
-    } else {
-        manualCancelTimer();
     }
+}
+
+function areTimersValid() {
+    if (activeTime.value == '' || restTime.value == '') {
+        alert("Both values must be set");
+        return false;
+    }
+
+    return true;
 }
 
 function setDisplayCounter() {
     var timeLeft = getTimeLeft(timer);
-    var counterDiv = document.getElementById("counter");
     counterDiv.innerText = timeLeft;
     counterTimer = setTimeout(setDisplayCounter, 1000);
 }
@@ -55,36 +56,31 @@ function beep() {
     snd.play();
 }
 
-function setTimer(time = 0, nextFunction) {
+function setTimer(time = 0, nextFunction, bgColour) {
+    beep();
     clearTimeout(timer);
+    document.body.style.backgroundColor = bgColour;
     startTimeMS = (new Date()).getTime();
-    if (time == 0) {
-        return;
-    }
-
     timer = setTimeout(nextFunction, time * 1000);
 }
 
 function setCountdown() {
-    timerTime = 3;
-
-    document.body.style.backgroundColor = "#ff0000";
-    setTimer(timerTime, setActiveTimer);
+    if (introCountdown.checked) {
+        timerTime = 3;
+        setTimer(timerTime, setActiveTimer, "#ff0000");
+    } else {
+        setActiveTimer();
+    }
 }
 
 function setActiveTimer() {
-    timerTime = document.getElementById("active-time").value;
-    document.body.style.backgroundColor = "#66ff00";
-    setTimer(timerTime, setRestTimer);
-    beep();
+    timerTime = activeTime.value;
+    setTimer(timerTime, setRestTimer, "#66ff00");
 }
 
 function setRestTimer() {
-    timerTime = document.getElementById("rest-time").value;
-    document.body.style.backgroundColor = "#ff0000";
-    setTimer(timerTime, setActiveTimer);
-    document.getElementById("counter").innerText = parseInt(timerTime) + 1;
-    beep();
+    timerTime = restTime.value;
+    setTimer(timerTime, setActiveTimer, "#ff0000");
 }
 
 function manualCancelTimer() {
@@ -93,7 +89,7 @@ function manualCancelTimer() {
 }
 
 function cancelTimer() {
-    document.body.style.backgroundColor = "white";
+    document.body.style.backgroundColor = "#fff";
     clearTimeout(timer);
     clearTimeout(counterTimer);
     document.getElementById("counter").innerText = "Go!";
