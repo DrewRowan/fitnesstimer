@@ -56,31 +56,30 @@ function beep() {
     snd.play();
 }
 
-function setTimer(time = 0, nextFunction, bgColour) {
+function setTimer(countdownSeconds = 0, nextFunction, bgColour) {
     beep();
     clearTimeout(timer);
+    timerTime = countdownSeconds;
     document.body.style.backgroundColor = bgColour;
     startTimeMS = (new Date()).getTime();
-    timer = setTimeout(nextFunction, time * 1000);
+    timer = setTimeout(nextFunction, countdownSeconds * 1000);
 }
 
 function setCountdown() {
     if (introCountdown.checked) {
-        timerTime = 3;
-        setTimer(timerTime, setActiveTimer, "#ff0000");
+        countdownTime = 3;
+        setTimer(countdownTime, setActiveTimer, "#ff0000");
     } else {
         setActiveTimer();
     }
 }
 
 function setActiveTimer() {
-    timerTime = activeTime.value;
-    setTimer(timerTime, setRestTimer, "#66ff00");
+    setTimer(activeTime.value, setRestTimer, "#66ff00");
 }
 
 function setRestTimer() {
-    timerTime = restTime.value;
-    setTimer(timerTime, setActiveTimer, "#ff0000");
+    setTimer(restTime.value, setActiveTimer, "#ff0000");
 }
 
 function cancelTimer() {
