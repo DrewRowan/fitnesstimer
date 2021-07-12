@@ -26,7 +26,7 @@ function toggleState() {
         noSleep.enable();
         isTimerActive = true;
         setCountdown();
-        setDisplayCounter();
+        setDisplayTimer();
     }
 }
 
@@ -39,10 +39,13 @@ function areTimersValid() {
     return true;
 }
 
+function setDisplayTimer() {
+    counterTimer = setInterval(setDisplayCounter, 1);
+}
+
 function setDisplayCounter() {
     var timeLeft = getTimeLeft(timer);
     counterDiv.innerText = timeLeft;
-    counterTimer = setTimeout(setDisplayCounter, 1000);
 }
 
 function getTimeLeft() {
