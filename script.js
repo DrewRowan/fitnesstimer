@@ -30,6 +30,12 @@ const RUNNING_TYPE_CONFIGURATIONS = {
 	},
 }
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const workoutJson = JSON.parse(atob(urlParams.get("workout")));
+
+console.log(workoutJson);
+
 //state
 let configurationState = {
 	[RUNNING_TYPES.ACTIVE]: {
@@ -41,10 +47,12 @@ let configurationState = {
 	active: true,
 	useIntroTimer: false
 }
+
 let runningState = {
 	stateType: RUNNING_TYPES.ACTIVE,
 	currentTick: RUNNING_TYPE_CONFIGURATIONS.ACTIVE.defaultTimeInSeconds
 }
+
 let workoutStep = 0;
 
 //listeners
