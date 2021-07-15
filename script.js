@@ -34,8 +34,6 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const workoutJson = JSON.parse(atob(urlParams.get("workout")));
 
-console.log(workoutJson);
-
 //state
 let configurationState = {
 	[RUNNING_TYPES.ACTIVE]: {
