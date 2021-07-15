@@ -1,6 +1,6 @@
 const workoutJson = {"list": 
     [
-        {"name": "Foam Roll Calves", "type": "time", "amount": ""},
+        {"name": "Foam Roll Calves", "type": "none", "amount": ""},
         {"name": "Foam Roll Hammys", "type": "none", "amount": ""},
         {"name": "Foam Roll Glutes", "type": "none", "amount": ""},
         {"name": "Foam Roll Quads", "type": "none", "amount": ""},
