@@ -16,36 +16,10 @@
 
   <body class="w-100 h-100">
 
-    <header>
-      <!-- Fixed navbar -->
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Enter timer details</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            
-          </ul>
-          <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" id="active-time" type="number" placeholder="Active Time" aria-label="Active Time">
-            <input class="form-control mr-sm-2" id="rest-time" type="number" placeholder="Rest Time" aria-label="Rest Time">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="intro-countdown" checked>
-              <label class="form-check-label text-white" for="flexCheckDefault">
-                Intro Countdown?
-              </label>
-            </div>
-          </form>
-        </div>
-      </nav>
-    </header>
-    
-    <div class="clearfix"></div>
-
     <!-- Begin page content -->
     <main class="w-100 h-100" role="main" class="container" id="main-body">
-      <h1 class="w-100 h-100 display-1 text-center" id="counter">Tap to start!</h1>
+      <h1 class="w-100 display-1 text-center" id="counter">Tap to start!</h1>
+      <h3 class="w-100 display-1 text-center" id="exercise-name"></h3>
     </main>
 
     <!-- Bootstrap core JavaScript
@@ -56,6 +30,7 @@
     <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="./workout.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
