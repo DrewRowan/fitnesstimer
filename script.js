@@ -81,6 +81,10 @@ function updateRestTime(time) {
 
 function stepThroughWorkout() {
     clearInterval(runningInterval);
+	
+    if (workoutStep == 0) {
+        noSleep.enable();
+    }
 
     //check for end of workout
     if (workoutStep == workoutJson.list.length) {
