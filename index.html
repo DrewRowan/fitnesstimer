@@ -6,23 +6,29 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-    
-  <!--   ?workout=eyJsaXN0IjpbeyJuYW1lIjoiRm9hbSBSb2xsIENhbHZlcyIsInR5cGUiOiJub25lIiwiYW1vdW50IjoiIn0seyJuYW1lIjoiRm9hbSBSb2xsIEhhbW15cyIsInR5cGUiOiJub25lIiwiYW1vdW50IjoiIn0seyJuYW1lIjoiRm9hbSBSb2xsIEdsdXRlcyIsInR5cGUiOiJub25lIiwiYW1vdW50IjoiIn0seyJuYW1lIjoiRm9hbSBSb2xsIFF1YWRzIiwidHlwZSI6Im5vbmUiLCJhbW91bnQiOiIifSx7Im5hbWUiOiJDYWxmIFJhaXNlcyAoMiB1cCwgMSBkb3duKSIsInR5cGUiOiJyZXAiLCJhbW91bnQiOjE1fSx7Im5hbWUiOiJCcmlkZ2Ugd2Fsa3MiLCJ0eXBlIjoidGltZSIsImFtb3VudCI6NDUsInJlc3QiOjEwfSx7Im5hbWUiOiJOYXJyb3cgU3F1YXQiLCJ0eXBlIjoicmVwIiwiYW1vdW50IjoxNX0seyJuYW1lIjoiSGlwIE9wZW5lciIsInR5cGUiOiJ0aW1lIiwiYW1vdW50Ijo0NSwicmVzdCI6MTB9LHsibmFtZSI6IlBpa2UiLCJ0eXBlIjoicmVwIiwiYW1vdW50IjoxNX0seyJuYW1lIjoiQ2xhbXMiLCJ0eXBlIjoicmVwIiwiYW1vdW50IjoxNX0seyJuYW1lIjoiR2x1dGUgQnJpZGdlcyIsInR5cGUiOiJyZXAiLCJhbW91bnQiOjE1fSx7Im5hbWUiOiJTaWRlIExlZyBSYWlzZSIsInR5cGUiOiJyZXAiLCJhbW91bnQiOjE1fSx7Im5hbWUiOiJTaWRlIEJ1bSBTdHJldGNoIiwidHlwZSI6InRpbWUiLCJhbW91bnQiOjQ1LCJyZXN0IjoxMH0seyJuYW1lIjoiSGFtc3RyaW5nIFN0cmV0Y2giLCJ0eXBlIjoidGltZSIsImFtb3VudCI6NDUsInJlc3QiOjEwfSx7Im5hbWUiOiJQbGFuayIsInR5cGUiOiJ0aW1lIiwiYW1vdW50Ijo0NX0seyJuYW1lIjoiUXVhZCBTdHJldGNoIiwidHlwZSI6InRpbWUiLCJhbW91bnQiOjQ1fV19   -->
 
     <title>Fitness Timer</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link href="footer.css" rel="stylesheet">
+    <!-- ?workout=eyJsaXN0IjpbeyJuYW1lIjoiRm9hbSBSb2xsIENhbHZlcyIsInR5cGUiOiJub25lIiwiYW1vdW50IjoiIn0seyJuYW1lIjoiRm9hbSBSb2xsIEhhbW15cyIsInR5cGUiOiJub25lIiwiYW1vdW50IjoiIn0seyJuYW1lIjoiRm9hbSBSb2xsIEdsdXRlcyIsInR5cGUiOiJub25lIiwiYW1vdW50IjoiIn0seyJuYW1lIjoiRm9hbSBSb2xsIFF1YWRzIiwidHlwZSI6Im5vbmUiLCJhbW91bnQiOiIifSx7Im5hbWUiOiJDYWxmIFJhaXNlcyAoMiB1cCwgMSBkb3duKSIsInR5cGUiOiJyZXAiLCJhbW91bnQiOjE1fSx7Im5hbWUiOiJCcmlkZ2Ugd2Fsa3MiLCJ0eXBlIjoidGltZSIsImFtb3VudCI6NDUsInJlc3QiOjEwfSx7Im5hbWUiOiJOYXJyb3cgU3F1YXQiLCJ0eXBlIjoicmVwIiwiYW1vdW50IjoxNX0seyJuYW1lIjoiSGlwIE9wZW5lciIsInR5cGUiOiJ0aW1lIiwiYW1vdW50Ijo0NSwicmVzdCI6MTB9LHsibmFtZSI6IlBpa2UiLCJ0eXBlIjoicmVwIiwiYW1vdW50IjoxNX0seyJuYW1lIjoiQ2xhbXMiLCJ0eXBlIjoicmVwIiwiYW1vdW50IjoxNX0seyJuYW1lIjoiR2x1dGUgQnJpZGdlcyIsInR5cGUiOiJyZXAiLCJhbW91bnQiOjE1fSx7Im5hbWUiOiJTaWRlIExlZyBSYWlzZSIsInR5cGUiOiJyZXAiLCJhbW91bnQiOjE1fSx7Im5hbWUiOiJTaWRlIEJ1bSBTdHJldGNoIiwidHlwZSI6InRpbWUiLCJhbW91bnQiOjQ1LCJyZXN0IjoxMH0seyJuYW1lIjoiSGFtc3RyaW5nIFN0cmV0Y2giLCJ0eXBlIjoidGltZSIsImFtb3VudCI6NDUsInJlc3QiOjEwfSx7Im5hbWUiOiJQbGFuayIsInR5cGUiOiJ0aW1lIiwiYW1vdW50Ijo0NX0seyJuYW1lIjoiUXVhZCBTdHJldGNoIiwidHlwZSI6InRpbWUiLCJhbW91bnQiOjQ1fV19 -->
   </head>
 
-  <body class="w-100 h-100">
+  <body>
 
     <!-- Begin page content -->
-    <main class="w-100 h-100" role="main" class="container" id="main-body">
+    <main class="w-100" role="main" class="container" id="main-body">
       <h1 class="w-100 display-1 text-center" id="counter">Tap to start!</h1>
       <h3 class="w-100 display-1 text-center" id="exercise-name"></h3>
     </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted float-left" id="exercise-prev"></span>
+        <span class="text-muted float-right" id="exercise-next"></span>
+      </div>
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
