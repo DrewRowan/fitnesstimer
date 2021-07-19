@@ -4,6 +4,8 @@ const noSleep = new NoSleep();
 //containers
 const counterDiv = document.getElementById("counter");
 const exerciseName = document.getElementById("exercise-name");
+const exerciseNext = document.getElementById("exercise-next");
+const exercisePrev = document.getElementById("exercise-prev");
 const container = document.getElementById("main-body");
 
 //flags
@@ -55,6 +57,7 @@ let workoutStep = 0;
 
 //listeners
 container.addEventListener("click", stepThroughWorkout);
+exercisePrev.addEventListener("click", stepBack);
 
 //functions
 function setConfigurationState(newState = {}) {
@@ -79,26 +82,47 @@ function updateRestTime(time) {
 	setConfigurationState({ [RUNNING_TYPES.REST]: { timeInSeconds: parseInt(time, 10) } });
 }
 
+function setBackgroundColour(color) {
+    document.body.style.backgroundColor = color;
+}
+
+function stepBack() {
+    if (workoutStep >= 2) {
+        workoutStep -= 2;
+        stepThroughWorkout();
+    }
+}
+
 function stepThroughWorkout() {
     clearInterval(runningInterval);
-	
+
+    //enable no sleep if first exercise
     if (workoutStep == 0) {
         noSleep.enable();
     }
 
     //check for end of workout
     if (workoutStep == workoutJson.list.length) {
-        workoutStep = 0;
         endWorkout();
         return;
     }
 
-    document.body.style.backgroundColor = RUNNING_TYPE_CONFIGURATIONS.ACTIVE.backgroundColor;
+    setNextText();
+    setPrevText();
+    setBackgroundColour(RUNNING_TYPE_CONFIGURATIONS.ACTIVE.backgroundColor);
 
     config = workoutJson.list[workoutStep];
     exerciseName.innerText = config.name;
+    
+
     if (workoutJson.list[workoutStep].type == "time") {
         //start timer
+        if (isNaN(config.amount)) {
+            config.amount = 10;
+        }
+        if (isNaN(config.rest)) {
+            config.rest = 10;
+        }
         updateActiveTime(config.amount);
         updateRestTime(config.rest);
         counterDiv.innerText = config.amount;
@@ -108,6 +132,28 @@ function stepThroughWorkout() {
         counterDiv.innerText = config.amount;
     }
     workoutStep += 1;
+}
+
+function setNextText() {
+    let nextStep = workoutStep + 1;
+    //check if next element exists
+    if (nextStep < workoutJson.list.length) {
+        let nextConfig = workoutJson.list[nextStep];
+        exerciseNext.innerText = "Next:" + nextConfig.name;
+    } else {
+        exerciseNext.innerText = "";
+    }
+}
+
+function setPrevText() {
+    let prevStep = workoutStep - 1;
+    //check if previous element exists
+    if (workoutStep > 0 && workoutStep < workoutJson.list.length) {
+        let prevConfig = workoutJson.list[prevStep];
+        exercisePrev.innerText = "Previous:" + prevConfig.name;
+    } else {
+        exercisePrev.innerText = "";
+    }
 }
 
 function toggleTimerState() {
@@ -120,7 +166,10 @@ function toggleTimerState() {
 }
 
 function endWorkout() {
+    workoutStep = 0;
     noSleep.disable();
+    exercisePrev.innerText = "";
+    exerciseNext.innerText = "";
     clearInterval(runningInterval);
     showStartScreen();
 }
@@ -139,7 +188,7 @@ function startTimer() {
 		currentRunningTypeConfiguration = RUNNING_TYPE_CONFIGURATIONS[runningState.stateType];
 	}
 	//set background
-	document.body.style.backgroundColor = currentRunningTypeConfiguration.backgroundColor;
+	setBackgroundColour(currentRunningTypeConfiguration.backgroundColor);
 	//draw number
 	counterDiv.innerText = runningState.currentTick;
 	//minus 1 from the current tick
@@ -154,13 +203,13 @@ function beep() {
 }
 
 function showStartScreen() {
-	document.body.style.backgroundColor = "#fff";
+	setBackgroundColour("#fff");
 	counterDiv.innerText = "Tap to start!";
     exerciseName.innerText = "";
 }
 
 function showStarting() {
-	document.body.style.backgroundColor = "#fff";
+	setBackgroundColour("#fff");
 	counterDiv.innerText = "Starting!";
     exerciseName.innerText = "";
 }
