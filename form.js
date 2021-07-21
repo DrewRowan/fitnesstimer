@@ -1,3 +1,6 @@
+//constants
+const currentUrl = window.location.href.split(/[?#]/)[0];
+
 // elements
 let exerciseTypeSelect = document.getElementsByClassName("exercise-type");
 let addRowButton = document.getElementById("add-row");
@@ -42,6 +45,8 @@ function saveWorkout() {
     }
 
     let encoded = btoa(JSON.stringify(obj));
+
+    window.location = currentUrl + "?workout=" + encoded;
 }
 
 function duplicateRow() {
