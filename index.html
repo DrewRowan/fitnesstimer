@@ -15,11 +15,45 @@
     <!-- ?workout=eyJsaXN0IjpbeyJuYW1lIjoiRm9hbSBSb2xsIENhbHZlcyIsInR5cGUiOiJub25lIiwiYW1vdW50IjoiIn0seyJuYW1lIjoiRm9hbSBSb2xsIEhhbW15cyIsInR5cGUiOiJub25lIiwiYW1vdW50IjoiIn0seyJuYW1lIjoiRm9hbSBSb2xsIEdsdXRlcyIsInR5cGUiOiJub25lIiwiYW1vdW50IjoiIn0seyJuYW1lIjoiRm9hbSBSb2xsIFF1YWRzIiwidHlwZSI6Im5vbmUiLCJhbW91bnQiOiIifSx7Im5hbWUiOiJDYWxmIFJhaXNlcyAoMiB1cCwgMSBkb3duKSIsInR5cGUiOiJyZXAiLCJhbW91bnQiOjE1fSx7Im5hbWUiOiJCcmlkZ2Ugd2Fsa3MiLCJ0eXBlIjoidGltZSIsImFtb3VudCI6NDUsInJlc3QiOjEwfSx7Im5hbWUiOiJOYXJyb3cgU3F1YXQiLCJ0eXBlIjoicmVwIiwiYW1vdW50IjoxNX0seyJuYW1lIjoiSGlwIE9wZW5lciIsInR5cGUiOiJ0aW1lIiwiYW1vdW50Ijo0NSwicmVzdCI6MTB9LHsibmFtZSI6IlBpa2UiLCJ0eXBlIjoicmVwIiwiYW1vdW50IjoxNX0seyJuYW1lIjoiQ2xhbXMiLCJ0eXBlIjoicmVwIiwiYW1vdW50IjoxNX0seyJuYW1lIjoiR2x1dGUgQnJpZGdlcyIsInR5cGUiOiJyZXAiLCJhbW91bnQiOjE1fSx7Im5hbWUiOiJTaWRlIExlZyBSYWlzZSIsInR5cGUiOiJyZXAiLCJhbW91bnQiOjE1fSx7Im5hbWUiOiJTaWRlIEJ1bSBTdHJldGNoIiwidHlwZSI6InRpbWUiLCJhbW91bnQiOjQ1LCJyZXN0IjoxMH0seyJuYW1lIjoiSGFtc3RyaW5nIFN0cmV0Y2giLCJ0eXBlIjoidGltZSIsImFtb3VudCI6NDUsInJlc3QiOjEwfSx7Im5hbWUiOiJQbGFuayIsInR5cGUiOiJ0aW1lIiwiYW1vdW50Ijo0NX0seyJuYW1lIjoiUXVhZCBTdHJldGNoIiwidHlwZSI6InRpbWUiLCJhbW91bnQiOjQ1fV19 -->
   </head>
 
-  <body>
+  <body class="h-100">
+
+    <div class="pos-f-t">
+      <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+          <form id="workout-list">
+            <div class="form-row mb-1">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Exercise name" name="name[]">
+              </div>
+              <div class="col">
+                <select class="form-control exercise-type" name="type[]">
+                  <option selected>Choose...</option>
+                  <option value="none">General</option>
+                  <option value="rep">Rep</option>
+                  <option value="time">Time</option>
+                </select>
+              </div>
+              <div class="col">
+                <input type="number" class="form-control d-none amount" placeholder="" name="amount[]">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control d-none rest" placeholder="Rest Time" name="rest[]">
+              </div>
+            </div>
+          </form>
+          <button type="button" class="btn btn-primary" id="add-row">Add row</button><button type="button" class="btn btn-primary ml-1" id="submit">Create workout</button>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </nav>
+    </div>
 
     <!-- Begin page content -->
-    <main class="w-100" role="main" class="container" id="main-body">
-      <h1 class="w-100 display-1 text-center" id="counter">Tap to start!</h1>
+    <main class="w-100 h-75" role="main" class="container" id="main-body">
+      <h1 class="w-100 display-1 text-center m-0" id="counter">Tap to start!</h1>
       <h3 class="w-100 display-1 text-center" id="exercise-name"></h3>
     </main>
 
@@ -39,5 +73,6 @@
     <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="./script.js"></script>
+    <script src="./form.js"></script>
   </body>
 </html>

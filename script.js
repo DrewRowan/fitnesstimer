@@ -34,7 +34,11 @@ const RUNNING_TYPE_CONFIGURATIONS = {
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-const workoutJson = JSON.parse(atob(urlParams.get("workout")));
+let workoutJsonList = [];
+if (urlParams.get("workout")) {
+    const workoutJson = JSON.parse(atob(urlParams.get("workout")));
+    workoutJsonList = workoutJson.list;
+}
 
 //state
 let configurationState = {
@@ -102,7 +106,7 @@ function stepThroughWorkout() {
     }
 
     //check for end of workout
-    if (workoutStep == workoutJson.list.length) {
+    if (workoutStep == workoutJsonList.length) {
         endWorkout();
         return;
     }
@@ -111,11 +115,11 @@ function stepThroughWorkout() {
     setPrevText();
     setBackgroundColour(RUNNING_TYPE_CONFIGURATIONS.ACTIVE.backgroundColor);
 
-    config = workoutJson.list[workoutStep];
+    config = workoutJsonList[workoutStep];
     exerciseName.innerText = config.name;
     
 
-    if (workoutJson.list[workoutStep].type == "time") {
+    if (workoutJsonList[workoutStep].type == "time") {
         //start timer
         if (isNaN(config.amount)) {
             config.amount = 10;
@@ -137,8 +141,8 @@ function stepThroughWorkout() {
 function setNextText() {
     let nextStep = workoutStep + 1;
     //check if next element exists
-    if (nextStep < workoutJson.list.length) {
-        let nextConfig = workoutJson.list[nextStep];
+    if (nextStep < workoutJsonList.length) {
+        let nextConfig = workoutJsonList[nextStep];
         exerciseNext.innerText = "Next:" + nextConfig.name;
     } else {
         exerciseNext.innerText = "";
@@ -148,8 +152,8 @@ function setNextText() {
 function setPrevText() {
     let prevStep = workoutStep - 1;
     //check if previous element exists
-    if (workoutStep > 0 && workoutStep < workoutJson.list.length) {
-        let prevConfig = workoutJson.list[prevStep];
+    if (workoutStep > 0 && workoutStep < workoutJsonList.length) {
+        let prevConfig = workoutJsonList[prevStep];
         exercisePrev.innerText = "Previous:" + prevConfig.name;
     } else {
         exercisePrev.innerText = "";
