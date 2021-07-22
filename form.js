@@ -6,6 +6,7 @@ let exerciseTypeSelect = document.getElementsByClassName("exercise-type");
 let addRowButton = document.getElementById("add-row");
 let saveWorkoutButton = document.getElementById("submit");
 let workoutListForm = document.getElementById("workout-list");
+let navBar = document.getElementById("navbarToggleExternalContent");
 let newRow = '<div class="form-row mb-1"><div class="col"><input type="text" class="form-control" placeholder="Exercise name" name="name[]"></div><div class="col"><select id="selectbox" class="form-control exercise-type" name="type[]"><option selected>Choose type...</option><option value="none">General</option><option value="rep">Rep</option><option value="time">Time</option></select></div><div class="col"><input type="number" class="form-control d-none amount" placeholder="" name="amount[]"></div><div class="col"><input type="number" class="form-control d-none rest" placeholder="Rest Time" name="rest[]"></div></div>';
 
 addRowButton.addEventListener("click", duplicateRow);
@@ -98,6 +99,8 @@ function populateForm() {
             selectType(list);
         });
         addMultipleListeners(exerciseTypeSelect, "change", initSelectType);
+    } else {
+        navBar.classList.add("show");
     }
 }
 
