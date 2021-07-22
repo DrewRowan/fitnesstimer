@@ -31,23 +31,29 @@ function saveWorkout() {
 
     let builtList = [];
 
+    // need to do some validation here
+
     for(key = 0; key < names.length; key++)  {
-        let exercise = { 
-            name: names[key].value,
-            type: types[key].value,
-            amount: amounts[key].value,
-            rest: rests[key].value
-        };
-        builtList.push(exercise);
+        if (names[key].value != "" && types[key].value != "") {
+            let exercise = { 
+                name: names[key].value,
+                type: types[key].value,
+                amount: amounts[key].value,
+                rest: rests[key].value
+            };
+            builtList.push(exercise);
+        }
     }
 
-    let obj = {
-        list: builtList
+    if (builtList.length > 0) {
+        let obj = {
+            list: builtList
+        }
+
+        let encoded = btoa(JSON.stringify(obj));
+
+        window.location = currentUrl + "?workout=" + encoded;
     }
-
-    let encoded = btoa(JSON.stringify(obj));
-
-    window.location = currentUrl + "?workout=" + encoded;
 }
 
 function duplicateRow() {
