@@ -101,7 +101,7 @@ function populateForm() {
         addMultipleListeners(exerciseTypeSelect, "change", initSelectType);
     } else {
         navBar.classList.add("show");
-        counterDiv.innerText = "Enter exercises above";
+        counterDiv.innerText = "Create workout";
         container.removeEventListener("click", stepThroughWorkout);
     }
 }
