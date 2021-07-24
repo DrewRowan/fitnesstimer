@@ -9,6 +9,11 @@ let workoutListForm = document.getElementById("workout-list");
 let navBar = document.getElementById("navbarToggleExternalContent");
 let newRow = '<div class="form-row mb-1"><div class="col"><input type="text" class="form-control" placeholder="Exercise name" name="name[]"></div><div class="col"><select id="selectbox" class="form-control exercise-type" name="type[]"><option selected>Choose type...</option><option value="none">General</option><option value="rep">Rep</option><option value="time">Time</option></select></div><div class="col"><input type="number" class="form-control d-none amount" placeholder="" name="amount[]"></div><div class="col"><input type="number" class="form-control d-none rest" placeholder="Rest Time" name="rest[]"></div></div>';
 
+let names;
+let types;
+let amounts;
+let rests;
+
 addRowButton.addEventListener("click", duplicateRow);
 saveWorkoutButton.addEventListener("click", saveWorkout);
 // actions
@@ -23,11 +28,20 @@ function addMultipleListeners(elements, event, trigger) {
     });
 }
 
+function getFormElements() {
+    names = document.getElementsByName('name[]');
+    types = document.getElementsByName('type[]');
+    amounts = document.getElementsByName('amount[]');
+    rests = document.getElementsByName('rest[]');
+}
+
 function saveWorkout() {
-    let names = document.getElementsByName('name[]');
-    let types = document.getElementsByName('type[]');
-    let amounts = document.getElementsByName('amount[]');
-    let rests = document.getElementsByName('rest[]');
+    getFormElements();
+    if (!validateForm()) {
+        return;
+    }
+
+    console.log('here');
 
     let builtList = [];
 
@@ -54,6 +68,48 @@ function saveWorkout() {
 
         window.location = currentUrl + "?workout=" + encoded;
     }
+}
+
+function validateForm() {
+    let validated = [];
+
+    for(key = 0; key < names.length; key++)  {
+        validated.push(checkAndSetInvalid(names[key]));
+        validated.push(checkAndSetInvalid(types[key]));
+
+        switch(types[key].value) {
+            case "rep":
+                validated.push(checkAndSetInvalid(amounts[key]));
+            break;
+            case "time":
+                validated.push(checkAndSetInvalid(amounts[key]));
+                validated.push(checkAndSetInvalid(rests[key]));
+            break;
+        }
+    }
+
+    if (validated.includes(false)) {
+        return false;
+    }
+
+    return true;
+}
+
+function checkAndSetInvalid(element) {
+    element.removeEventListener('change', checkValidation);
+    element.classList.remove("invalid");
+    if (element.value == "") {
+        element.classList.add("invalid");
+        element.addEventListener('change', checkValidation);
+        element.add
+        return false;
+    }
+
+    return true;
+}
+
+function checkValidation() {
+    checkAndSetInvalid(this);
 }
 
 function duplicateRow() {
@@ -90,7 +146,7 @@ function selectType(obj) {
             amount.classList.remove("d-none");
             amount.placeholder = "Active time";
             restTime.classList.remove("d-none");
-      }
+    }
 }
 
 function populateForm() {
