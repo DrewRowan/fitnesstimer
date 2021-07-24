@@ -180,6 +180,7 @@ function populateRow(list, index) {
     selectBox.value = list.type;
     $( function() {
         $( "#workout-list" ).sortable();
+        $( "#workout-list" ).disableSelection();
     } );
 }
 
@@ -191,4 +192,5 @@ function deleteRow() {
 // jquery
 $( function() {
     $( "#workout-list" ).sortable();
+    $( "#workout-list" ).disableSelection();
 } );
