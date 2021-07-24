@@ -20,28 +20,36 @@
     <div class="pos-f-t">
       <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark p-4">
-          <form id="workout-list">
-            <div class="form-row mb-1">
-              <div class="col">
-                <input type="text" class="form-control" placeholder="Exercise name" name="name[]">
+          <ul id="workout-list">
+            <li>
+              <div class="form-row mb-1">
+                <div class="col-1">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="height:30px;" class="svg-inline--fa fa-trash fa-w-14 fa-lg"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z" class=""></path></svg>
+                  <i class="sort-by-desc"></i>
+                  <i class="sort-by-asc"></i>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Exercise name" name="name[]">
+                </div>
+                <div class="col">
+                  <select class="form-control exercise-type" name="type[]">
+                    <option value="" disabled selected>Choose type...</option>
+                    <option value="none">General</option>
+                    <option value="rep">Rep</option>
+                    <option value="time">Time</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <input type="number" class="form-control d-none amount" placeholder="" name="amount[]">
+                </div>
+                <div class="col">
+                  <input type="number" class="form-control d-none rest" placeholder="Rest Time" name="rest[]">
+                </div>
               </div>
-              <div class="col">
-                <select class="form-control exercise-type" name="type[]">
-                  <option value="">Choose type...</option>
-                  <option value="none">General</option>
-                  <option value="rep">Rep</option>
-                  <option value="time">Time</option>
-                </select>
-              </div>
-              <div class="col">
-                <input type="number" class="form-control d-none amount" placeholder="" name="amount[]">
-              </div>
-              <div class="col">
-                <input type="number" class="form-control d-none rest" placeholder="Rest Time" name="rest[]">
-              </div>
-            </div>
-          </form>
-          <button type="button" class="btn btn-primary" id="add-row">Add row</button><button type="button" class="btn btn-primary ml-1" id="submit">Create workout</button>
+            </li>
+          </ul>
+          <button type="button" class="btn btn-primary" id="add-row">Add row</button>
+          <button type="button" class="btn btn-primary ml-1" id="submit">Save workout</button>
         </div>
       </div>
       <nav class="navbar navbar-dark bg-dark">
@@ -71,7 +79,10 @@
     <script src="https://richtr.github.io/NoSleep.js/dist/NoSleep.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script src="./script.js"></script>
     <script src="./form.js"></script>
   </body>

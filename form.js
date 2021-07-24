@@ -3,11 +3,12 @@ const currentUrl = window.location.href.split(/[?#]/)[0];
 
 // elements
 let exerciseTypeSelect = document.getElementsByClassName("exercise-type");
+let removeRowButton = document.getElementsByClassName("fa-trash");
 let addRowButton = document.getElementById("add-row");
 let saveWorkoutButton = document.getElementById("submit");
 let workoutListForm = document.getElementById("workout-list");
 let navBar = document.getElementById("navbarToggleExternalContent");
-let newRow = '<div class="form-row mb-1"><div class="col"><input type="text" class="form-control" placeholder="Exercise name" name="name[]"></div><div class="col"><select id="selectbox" class="form-control exercise-type" name="type[]"><option selected>Choose type...</option><option value="none">General</option><option value="rep">Rep</option><option value="time">Time</option></select></div><div class="col"><input type="number" class="form-control d-none amount" placeholder="" name="amount[]"></div><div class="col"><input type="number" class="form-control d-none rest" placeholder="Rest Time" name="rest[]"></div></div>';
+let newRow = '<li><div class="form-row mb-1"><div class="col-1"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="height:30px;" class="svg-inline--fa fa-trash fa-w-14 fa-lg"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z" class=""></path></svg><i class="sort-by-desc"></i><i class="sort-by-asc"></i></div><div class="col"><span class="ui-icon ui-icon-arrowthick-2-n-s"><input type="text" class="form-control" placeholder="Exercise name" name="name[]"></div><div class="col"><select id="selectbox" class="form-control exercise-type" name="type[]"><option value="" disabled selected>Choose type...</option><option value="none">General</option><option value="rep">Rep</option><option value="time">Time</option></select></div><div class="col"><input type="number" class="form-control d-none amount" placeholder="" name="amount[]"></div><div class="col"><input type="number" class="form-control d-none rest" placeholder="Rest Time" name="rest[]"></div></div><li>';
 
 let names;
 let types;
@@ -18,6 +19,7 @@ addRowButton.addEventListener("click", duplicateRow);
 saveWorkoutButton.addEventListener("click", saveWorkout);
 // actions
 addMultipleListeners(exerciseTypeSelect, "change", initSelectType);
+addMultipleListeners(removeRowButton, "click", deleteRow);
 populateForm();
 
 // functions
@@ -89,6 +91,7 @@ function validateForm() {
     }
 
     if (validated.includes(false)) {
+        alert('Please ensure all fields are filled out correctly');
         return false;
     }
 
@@ -115,6 +118,7 @@ function checkValidation() {
 function duplicateRow() {
     workoutListForm.insertAdjacentHTML('beforeend', newRow);
     addMultipleListeners(exerciseTypeSelect, "change", initSelectType);
+    addMultipleListeners(removeRowButton, "click", deleteRow);
 }
 
 function initSelectType() {
@@ -122,7 +126,6 @@ function initSelectType() {
 }
 
 function selectType(obj) {
-    let element = document.getElementById("selectbox");
     let parent = obj.closest(".col");
     let amountSibling = parent.nextElementSibling;
     let amount = amountSibling.querySelector(".amount");
@@ -130,22 +133,23 @@ function selectType(obj) {
     let restTime = restTimeSibling.querySelector(".rest");
 
     switch(obj.value) {
-        case "none":
-            amount.classList.add("d-none");
-            restTime.classList.add("d-none");
-            amount.value = "";
-            restTime.value = "";
-          break;
         case "rep":
             amount.classList.remove("d-none");
             amount.placeholder = "Reps";
             restTime.classList.add("d-none");
             restTime.value = "";
           break;
-        default:
+        case "time":
             amount.classList.remove("d-none");
             amount.placeholder = "Active time";
             restTime.classList.remove("d-none");
+          break;
+        default:
+            amount.classList.add("d-none");
+            restTime.classList.add("d-none");
+            amount.value = "";
+            restTime.value = "";
+          break;
     }
 }
 
@@ -161,6 +165,7 @@ function populateForm() {
             selectType(list);
         });
         addMultipleListeners(exerciseTypeSelect, "change", initSelectType);
+        addMultipleListeners(removeRowButton, "click", deleteRow);
     } else {
         navBar.classList.add("show");
         counterDiv.innerText = "Create workout";
@@ -169,8 +174,21 @@ function populateForm() {
 }
 
 function populateRow(list, index) {
-    let newPopulatedRow = '<div class="form-row mb-1"><div class="col"><input type="text" class="form-control" placeholder="Exercise name" name="name[]" value="' + list.name + '"></div><div class="col"><select id="selectbox-' + index + '" class="form-control exercise-type" name="type[]"><option selected>Choose type...</option><option value="none">General</option><option value="rep">Rep</option><option value="time">Time</option></select></div><div class="col"><input type="number" class="form-control amount" placeholder="" name="amount[]" value="' + list.amount + '"></div><div class="col"><input type="number" class="form-control rest" placeholder="Rest Time" name="rest[]"  value="' + list.rest + '"></div></div>'
+    let newPopulatedRow = '<li><div class="form-row mb-1"><div class="col-1"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="height:30px;" class="svg-inline--fa fa-trash fa-w-14 fa-lg"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z" class=""></path></svg><i class="sort-by-desc"></i><i class="sort-by-asc"></i></div><div class="col"><span class="ui-icon ui-icon-arrowthick-2-n-s"><input type="text" class="form-control" placeholder="Exercise name" name="name[]" value="' + list.name + '"></div><div class="col"><select id="selectbox-' + index + '" class="form-control exercise-type" name="type[]"><option value="" disabled selected>Choose type...</option><option value="none">General</option><option value="rep">Rep</option><option value="time">Time</option></select></div><div class="col"><input type="number" class="form-control amount" placeholder="" name="amount[]" value="' + list.amount + '"></div><div class="col"><input type="number" class="form-control rest" placeholder="Rest Time" name="rest[]"  value="' + list.rest + '"></div></div><li>'
     workoutListForm.insertAdjacentHTML('beforeend', newPopulatedRow);
     let selectBox = document.getElementById("selectbox-" + index);
     selectBox.value = list.type;
+    $( function() {
+        $( "#workout-list" ).sortable();
+    } );
 }
+
+function deleteRow() {
+    let parent = this.closest("li");
+    parent.remove();
+}
+
+// jquery
+$( function() {
+    $( "#workout-list" ).sortable();
+} );
