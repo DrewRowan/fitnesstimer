@@ -166,7 +166,7 @@ function populateForm() {
         });
         addMultipleListeners(exerciseTypeSelect, "change", initSelectType);
         addMultipleListeners(removeRowButton, "click", deleteRow);
-        exerciseNext.innerText = "Next:" + workoutJsonList[0].name;
+        exerciseNext.innerText = "First:" + workoutJsonList[0].name;
     } else {
         navBar.classList.add("show");
         counterDiv.innerText = "Create workout";
