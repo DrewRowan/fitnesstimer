@@ -161,7 +161,6 @@ function setPrevText() {
 }
 
 function toggleTimerState() {
-    console.log(configurationState);
     setRunningState({
         stateType: RUNNING_TYPES.ACTIVE,
         currentTick: configurationState.ACTIVE.timeInSeconds
@@ -181,15 +180,19 @@ function endWorkout() {
 function startTimer() {
 	//check state
 	let currentRunningTypeConfiguration = RUNNING_TYPE_CONFIGURATIONS[runningState.stateType];
+	let goToNext = false;
 	//if running is down to 0 change to next state types
 	if (runningState.currentTick <= 0) {
-		beep();
 		let nextRunningStateType = currentRunningTypeConfiguration.nextType;
+		beep();
 		setRunningState({
 			stateType: nextRunningStateType,
 			currentTick: configurationState[nextRunningStateType].timeInSeconds
 		});
 		currentRunningTypeConfiguration = RUNNING_TYPE_CONFIGURATIONS[runningState.stateType];
+		if (nextRunningStateType == "ACTIVE") {
+			goToNext = true;
+		}
 	}
 	//set background
 	setBackgroundColour(currentRunningTypeConfiguration.backgroundColor);
@@ -199,6 +202,9 @@ function startTimer() {
 	setRunningState({
 		currentTick: runningState.currentTick - 1
 	});
+	if (goToNext === true) {
+		stepThroughWorkout();
+	}
 }
 
 function beep() {
