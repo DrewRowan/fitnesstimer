@@ -21,8 +21,9 @@ background-color: rgba(245, 245, 245, 0.46);
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-footer {
-    z-index: -10;
+.nav-bar {
+    position: relative;
+    z-index: 10;
 }
 
 footer.container {
