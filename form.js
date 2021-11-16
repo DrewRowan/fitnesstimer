@@ -129,9 +129,11 @@ function addRow() {
 
 function copyRow() {
     let parent = this.closest("li");
+    let typeSelectBox = parent.querySelector('.exercise-type');
     var clone = parent.cloneNode(true);
-    //need to add a way to copy select box values
     parent.after(clone);
+
+    clone.querySelector('.exercise-type').value = typeSelectBox.value;
     attachEventListeners();
 }
 
