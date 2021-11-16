@@ -36,7 +36,7 @@ padding: 0 15px;
     border-color: #dc3545;
 }
 
-.fa-trash {
+.fa-trash, .bi-clipboard {
     cursor: pointer;
 }
 
