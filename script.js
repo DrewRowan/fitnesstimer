@@ -90,6 +90,10 @@ function setBackgroundColour(color) {
     document.body.style.backgroundColor = color;
 }
 
+function setExerciseNameText(exerciseDisplayName) {
+    exerciseName.innerText = exerciseDisplayName;
+}
+
 function stepBack() {
     if (workoutStep >= 2) {
         workoutStep -= 2;
@@ -116,7 +120,7 @@ function stepThroughWorkout() {
     setBackgroundColour(RUNNING_TYPE_CONFIGURATIONS.ACTIVE.backgroundColor);
 
     config = workoutJsonList[workoutStep];
-    exerciseName.innerText = config.name;
+    setExerciseNameText(config.name);
     
 
     if (workoutJsonList[workoutStep].type == "time") {
@@ -196,6 +200,8 @@ function startTimer() {
 	}
 	//set background
 	setBackgroundColour(currentRunningTypeConfiguration.backgroundColor);
+    let exerciseDisplayName = getExerciseNameToDisplay(runningState.stateType);
+    setExerciseNameText(exerciseDisplayName);
 	//draw number
 	counterDiv.innerText = runningState.currentTick;
 	//minus 1 from the current tick
@@ -205,6 +211,21 @@ function startTimer() {
 	if (goToNext === true) {
 		stepThroughWorkout();
 	}
+}
+
+function getExerciseNameToDisplay(stateName) {
+    currentDisplayName = exerciseName.textContent;
+    if (stateName === "REST") {
+        //check if next element exists
+        if (workoutStep < workoutJsonList.length) {
+            let nextConfig = workoutJsonList[workoutStep];
+            return 'Next: ' + nextConfig.name;
+        } else {
+            return 'Finish!'
+        }
+    } else {
+        return currentDisplayName;
+    }
 }
 
 function beep() {
@@ -218,8 +239,3 @@ function showStartScreen() {
     exerciseName.innerText = "";
 }
 
-function showStarting() {
-	setBackgroundColour("#fff");
-	counterDiv.innerText = "Starting!";
-    exerciseName.innerText = "";
-}
